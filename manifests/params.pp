@@ -1,7 +1,7 @@
 class maldet::params {
   $version     = '1.5'
   $daily_scans = true
-  $mirror_url  = 'http://www.rfxn.com/downloads'
+  $mirror_url  = 'https://www.rfxn.com/downloads'
   $config      = {}
   $config_type = ''
 
