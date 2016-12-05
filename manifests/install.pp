@@ -31,8 +31,8 @@ class maldet::install (
   } ->
   exec { 'install maldet':
     command     => "${extract_dir}/install.sh",
-    pwd         => $extract_dir,
-    unless      => "/usr/local/sbin/maldet | head -n1 | grep -q ${version}",
+    cwd         => $extract_dir,
+    unless      => "/usr/bin/test ! -e /usr/local/sbin/maldet || /usr/local/sbin/maldet | head -n1 | grep -q ${version}",
   }
 
 }
