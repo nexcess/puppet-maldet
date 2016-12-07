@@ -53,6 +53,10 @@ Optional package name to use. Will install from source if left empty.
 
 Whether to install or remove maldet. Valid values are "present" or "absent".
 
+#### `service_ensure` _String_ ('running')
+
+Whether the maldet inotify monitor service should be running.
+
 #### `daily_scan` _Boolean_ (true)
 
 Whether to enable maldet's daily scan cron job.
@@ -66,6 +70,10 @@ Base URL to download maldet source tarball from. Defaults to 'https://www.rfxn.c
 Hash of config options to use. Booleans are converted to 0 or 1. Options with multiple values such as email_addr and scan_tmpdir_paths should be specified as an Array. Uses defaults provided from Maldet source, except daily version updates are disabled by default.
 
 See https://www.rfxn.com/appdocs/README.maldetect for available configuration options.
+
+#### `monitor_paths` _Array[String]_ ({})
+
+List of paths that the maldet service should monitor files under. Note that directories containing.
 
 #### `cron_config` _Hash_ ({})
 
