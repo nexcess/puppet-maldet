@@ -1,3 +1,4 @@
+# Install Linux Malware Detect
 class maldet::install (
   String  $version             = $maldet::version,
   String  $mirror_url          = $maldet::mirror_url,
