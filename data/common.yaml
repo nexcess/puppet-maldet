@@ -1,0 +1,87 @@
+---
+maldet::version: '1.5'
+maldet::package_name: ''
+maldet::ensure: present
+maldet::daily_scan: true
+maldet::mirror_url: https://www.rfxn.com/downloads
+maldet::config: {}
+
+# Config defaults for Linux Malware Detect > 1.5
+maldet::new_config:
+  email_alert: false
+  email_addr:
+    - you@domain.com
+  email_ignore_clean: true
+  autoupdate_signatures: true
+  autoupdate_version: false
+  autoupdate_version_hashed: true
+  import_config_url: ''
+  import_config_expire: 43200
+  import_sigs_md5_url: ''
+  import_sigs_hex_url: ''
+  scan_max_depth: 15
+  scan_min_filesize: 24
+  scan_max_filesize: 768k
+  scan_hexdepth: 65536
+  scan_hexfifo: true
+  scan_hexfifo_depth: 524288
+  scan_clamscan: true
+  scan_tmpdir_paths:
+    - /tmp
+    - /var/tmp
+    - /dev/shm
+    - /var/fcgi_ipc
+  scan_user_access: false
+  scan_cpunice: 19
+  scan_ionice: 6
+  scan_cpulimit: false
+  scan_ignore_root: true
+  scan_ignore_user: []
+  scan_ignore_group: []
+  scan_find_timeout: false
+  scan_export_filelist: false
+  quarantine_hits: false
+  quarantine_clean: false
+  quarantine_suspend_user: false
+  quarantine_suspend_user_minuid: 500
+  default_monitor_mode: /usr/local/maldetect/monitor_paths
+  inotify_base_watches: 16384
+  inotify_sleep: 15
+  inotify_reloadtime: 3600
+  inotify_minuid: 500
+  inotify_docroot: public_html
+  inotify_cpunice: 18
+  inotify_ionice: 6
+  inotify_cpulimit: 0
+  inotify_verbose: false
+  string_length_scan: false
+  string_length: 150000
+maldet::cron_config: {}
+maldet::cleanup_old_install: true
+
+# Config defaults for Linux Malware Detect < 1.5
+maldet::old_config:
+  email_alert: false
+  email_subj: maldet alert from $(hostname)
+  email_addr:
+    - you@domain.com
+  email_ignore_clean: false
+  quar_hits: false
+  quar_clean: true
+  quar_susp: false
+  quar_susp_minuid: 500
+  maxdepth: 15
+  minfilesize: 32
+  maxfilesize: 768k
+  hexdepth: 61440
+  hex_fifo_scan: true
+  hex_fifo_depth: 524288
+  clamav_scan: true
+  public_scan: false
+  string_length_scan: false
+  string_length: 150000
+  inotify_base_watches: 15360
+  inotify_stime: 30
+  inotify_minuid: 500
+  inotify_webdir: public_html
+  inotify_nice: 10

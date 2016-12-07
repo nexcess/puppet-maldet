@@ -8,6 +8,7 @@
   "project_page": "https://github.com/nexcess/puppet-maldet",
   "issues_url": "https://github.com/nexcess/puppet-maldet/issues",
   "tags": [],
+  "data_provider": "hiera",
   "operatingsystem_support": [
     {
       "operatingsystem": "RedHat",
