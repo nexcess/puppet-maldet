@@ -17,6 +17,11 @@ This module has been tested with Maldet verions:
 
 By default Maldet is installed from source using the Maldet {} type/provider. If you prefer to use a package, simply use the "package_name" parameter to specify the name of your package, and it will use that instead (assuming any necessary repositories have been enabled).
 
+Maldet will setup a cronjob that runs a daily scan on certain paths on the servers home directory depending on what directories it sees as present on a server.
+
+It will also setup an inotify service to watch and scan changed files under certain directories (set to /tmp, /var/tmp, /dev/shm, and /var/fcgi_ipc by default).
+
+Both the cron job and service are managed by the daily_scan and service_ensure parameters, respectively.
 
 ## Usage
 
@@ -36,6 +41,7 @@ include ::maldet
 
 * maldet::install: Installs Maldet
 * maldet::config: Manages configuration file and daily malware scan for Maldet
+* maldet::service: Manage Maldet inotify service
 
 ### Parameters
 
