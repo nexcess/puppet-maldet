@@ -10,7 +10,8 @@ class maldet::install (
   # killall is used by install.sh
   # cpulimit is used for the scan_cpulimit config option
   # wget is used for signature & version updates
-  ensure_packages(['psmisc', 'wget', 'cpulimit'])
+  # inotify-tools is used by the maldet service
+  ensure_packages(['psmisc', 'wget', 'cpulimit', 'inotify-tools'])
 
   if $package_name == '' {
     maldet { $mirror_url :

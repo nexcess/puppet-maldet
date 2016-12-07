@@ -11,8 +11,10 @@ describe 'maldet' do
         it { is_expected.to compile.with_all_deps }
         it { is_expected.to contain_class('maldet') }
         it { is_expected.to contain_class('maldet::install').
-             that_comes_before('Class[maldet::config]') }
-        it { is_expected.to contain_class('maldet::config') }
+             that_notifies('Class[maldet::config]') }
+        it { is_expected.to contain_class('maldet::config').
+             that_notifies('Class[maldet::service]') }
+        it { is_expected.to contain_class('maldet::service') }
       end
 
       describe 'maldet::install' do
@@ -24,6 +26,7 @@ describe 'maldet' do
         it { should contain_package('psmisc').with(:ensure => 'present') }
         it { should contain_package('wget').with(:ensure => 'present') }
         it { should contain_package('cpulimit').with(:ensure => 'present') }
+        it { should contain_package('inotify-tools').with(:ensure => 'present') }
         it { should contain_maldet('https://www.rfxn.com/downloads').
              with(:ensure => 'present') }
 
@@ -54,6 +57,15 @@ describe 'maldet' do
           it { should contain_file('/etc/cron.daily/maldet').
                with(:ensure => 'absent') }
         end
+      end
+
+      describe 'maldet::service' do
+        let(:params) {{ :service_ensure => 'running',
+                        :monitor_paths => ['/tmp', '/var/tmp'] }}
+        it { should contain_file('/usr/local/maldetect/monitor_paths').
+             with(:ensure => 'present') }
+        it { should contain_service('maldet').
+             with(:ensure => 'running') }
       end
     end
   end
