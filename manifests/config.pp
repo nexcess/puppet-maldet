@@ -1,3 +1,4 @@
+# Manage Linux Malware Detect configuration files
 class maldet::config (
   Hash    $config      = $maldet::config,
   Hash    $cron_config = $maldet::cron_config,
@@ -20,7 +21,7 @@ class maldet::config (
     mode    => '0644',
     owner   => root,
     group   => root,
-    content => epp("maldet/conf.maldet.epp", { 'config' => $merged_config }),
+    content => epp('maldet/conf.maldet.epp', { 'config' => $merged_config }),
   }
 
   # Allow config overrides for daily cron
@@ -30,7 +31,7 @@ class maldet::config (
       mode    => '0644',
       owner   => root,
       group   => root,
-      content => epp("maldet/conf.maldet.epp", { 'config' => $cron_config }),
+      content => epp('maldet/conf.maldet.epp', { 'config' => $cron_config }),
     }
   }
 
