@@ -1,38 +1,25 @@
 class maldet::install (
-  String $version    = $maldet::version,
-  String $mirror_url = $maldet::mirror_url,
+  String  $version             = $maldet::version,
+  String  $mirror_url          = $maldet::mirror_url,
+  String  $package_name        = $maldet::package_name,
+  String  $ensure              = $maldet::ensure,
+  Boolean $cleanup_old_install = $maldet::cleanup_old_install,
 ) {
 
-  $filename     = "maldetect-${version}.tar.gz"
-  $download_dir = '/usr/local/maldetect_install'
-  $extract_dir  = "${download_dir}/maldetect-${version}"
-  $package_url  = "${mirror_url}/${filename}"
+  # killall is used by install.sh
+  # cpulimit is used for the scan_cpulimit config option
+  # wget is used for signature & version updates
+  ensure_packages(['psmisc', 'wget', 'cpulimit'])
 
-  # The killall command is used by install.sh
-  # 'cpulimit' is used for the scan_cpulimit config option
-  ensure_packages(['psmisc'])
-
-  file { $download_dir:
-    ensure => directory,
-    mode   => '0755',
-    owner  => root,
-    group  => root,
-  } ->
-  archive { "${download_dir}/${filename}":
-    source       => $package_url,
-    #checksum => $checksum,
-    #checksum_type => $checksum_type,
-    cleanup      => true,
-    user         => root,
-    group        => root,
-    extract      => true,
-    extract_path => $download_dir,
-    creates      => "${extract_dir}/install.sh",
-  } ->
-  exec { 'install maldet':
-    command     => "${extract_dir}/install.sh",
-    cwd         => $extract_dir,
-    unless      => "/usr/bin/test ! -e /usr/local/sbin/maldet || /usr/local/sbin/maldet | head -n1 | grep -q ${version}",
+  if $package_name == '' {
+    maldet { $mirror_url :
+      ensure              => $ensure,
+      version             => $version,
+      cleanup_old_install => $cleanup_old_install,
+    }
+  } else {
+    package { $package_name:
+      ensure => $ensure,
+    }
   }
-
 }

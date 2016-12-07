@@ -1,10 +1,13 @@
 class maldet (
-  String  $version     = $maldet::params::version,
-  Boolean $daily_scans = $maldet::params::daily_scans,
-  String  $mirror_url  = $maldet::params::mirror_url,
-  Hash    $config      = $maldet::params::config,
-  String  $config_type = $maldet::params::config_type,
-) inherits maldet::params {
+  String  $version,
+  String  $package_name,
+  String  $ensure,
+  Boolean $daily_scan,
+  String  $mirror_url,
+  Hash    $config,
+  Hash    $cron_config,
+  Boolean $cleanup_old_install,
+) {
 
   contain maldet::install
   contain maldet::config
