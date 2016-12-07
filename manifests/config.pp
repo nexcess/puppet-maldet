@@ -1,7 +1,8 @@
 class maldet::config (
-  Hash   $config      = $maldet::config,
-  Hash   $cron_config = $maldet::cron_config,
-  String $version     = $maldet::version,
+  Hash    $config      = $maldet::config,
+  Hash    $cron_config = $maldet::cron_config,
+  String  $version     = $maldet::version,
+  Boolean $daily_scan  = $maldet::daily_scan,
 ) {
 
   # Versions of maldet < 1.5 use a different set of
@@ -33,7 +34,7 @@ class maldet::config (
     }
   }
 
-  unless $maldet::daily_scan {
+  unless $daily_scan {
     file { '/etc/cron.daily/maldet':
       ensure => absent,
     }
