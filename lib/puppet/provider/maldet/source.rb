@@ -37,7 +37,7 @@ Puppet::Type.type(:maldet).provide(:source) do
       %x{ ./install.sh }
     end
     FileUtils.remove_dir(@resource[:extract_dir])
-    if @resource[:cleanup_old_install] then
+    if @resource[:cleanup_old_install] and File.exists?('/usr/local/maldetect.last') then
       realpath = File.realpath('/usr/local/maldetect.last')
       FileUtils.remove_dir(realpath)
       File.unlink('/usr/local/maldetect.last')
