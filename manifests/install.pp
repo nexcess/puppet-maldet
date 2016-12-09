@@ -11,7 +11,17 @@ class maldet::install (
   # cpulimit is used for the scan_cpulimit config option
   # wget is used for signature & version updates
   # inotify-tools is used by the maldet service
-  ensure_packages(['psmisc', 'wget', 'cpulimit', 'inotify-tools'])
+  ensure_packages(['psmisc', 'wget', 'cpulimit', 'inotify-tools', 'perl'])
+
+  if $facts['os']['family'] == 'Redhat' {
+    include ::epel
+    Class['epel'] ->
+    Package['psmisc'] ->
+    Package['wget'] ->
+    Package['cpulimit'] ->
+    Package['inotify-tools'] ->
+    Package['perl']
+  }
 
   if $package_name == '' {
     maldet { $mirror_url :
