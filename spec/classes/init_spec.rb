@@ -27,6 +27,7 @@ describe 'maldet' do
         it { should contain_package('wget').with(:ensure => 'present') }
         it { should contain_package('cpulimit').with(:ensure => 'present') }
         it { should contain_package('inotify-tools').with(:ensure => 'present') }
+        it { should contain_package('perl').with(:ensure => 'present') }
         it { should contain_maldet('https://www.rfxn.com/downloads').
              with(:ensure => 'present') }
 
