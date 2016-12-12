@@ -1,10 +1,10 @@
 {
   "name": "nexcess-maldet",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "author": "nexcess",
-  "summary": "",
+  "summary": "Install and configure Linux Malware Detect",
   "license": "Apache-2.0",
-  "source": "",
+  "source": "https://github.com/nexcess/puppet-maldet",
   "project_page": "https://github.com/nexcess/puppet-maldet",
   "issues_url": "https://github.com/nexcess/puppet-maldet/issues",
   "tags": [],
