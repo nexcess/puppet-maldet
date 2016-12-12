@@ -40,11 +40,11 @@ class maldet::config (
     # MONITOR_MODE is commented out by default and can prevent maldet service
     # from starting when using the init based startup script.
     file { '/etc/sysconfig/maldet':
-      ensure     => present,
-      mode       => '0644',
-      owner      => root,
-      group      => root,
-      content    => inline_epp('MONITOR_MODE="<%= $monitor_mode %>"', {'monitor_mode' => $merged_config['default_monitor_mode']}),
+      ensure  => present,
+      mode    => '0644',
+      owner   => root,
+      group   => root,
+      content => inline_epp('MONITOR_MODE="<%= $monitor_mode %>"', {'monitor_mode' => $merged_config['default_monitor_mode']}),
     }
   }
 
