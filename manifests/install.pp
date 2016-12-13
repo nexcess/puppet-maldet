@@ -13,7 +13,12 @@ class maldet::install (
   # inotify-tools is used by the maldet service
   ensure_packages(['psmisc', 'wget', 'cpulimit', 'inotify-tools', 'perl'])
 
-  if $facts['os']['family'] == 'Redhat' {
+  file { ['/usr/sbin/maldet', '/usr/sbin/lmd']:
+    ensure => link,
+    target => '/usr/local/maldetect/maldet',
+  }
+
+  if $::facts['os']['family'] == 'Redhat' {
     include ::epel
     Class['epel'] ->
     Package['psmisc'] ->

@@ -17,34 +17,37 @@ class maldet::config (
     $merged_config = $default_config + $config
   }
 
+  $merged_conf = { 'config' => $merged_config }
   file { '/usr/local/maldetect/conf.maldet':
     ensure  => present,
     mode    => '0644',
     owner   => root,
     group   => root,
-    content => epp('maldet/conf.maldet.epp', { 'config' => $merged_config }),
+    content => epp('maldet/conf.maldet.epp', $merged_conf),
   }
 
   # Allow config overrides for daily cron
+  $cron_conf = { 'config' => $cron_config }
   if versioncmp($maldet::version, '1.5') >= 0 {
     file { '/usr/local/maldetect/cron/conf.maldet.cron':
       ensure  => present,
       mode    => '0644',
       owner   => root,
       group   => root,
-      content => epp('maldet/conf.maldet.epp', { 'config' => $cron_config }),
+      content => epp('maldet/conf.maldet.epp', $cron_conf),
     }
   }
 
-  if $facts['service_provider'] == 'redhat' {
-    # MONITOR_MODE is commented out by default and can prevent maldet service
-    # from starting when using the init based startup script.
+  # MONITOR_MODE is commented out by default and can prevent maldet service
+  # from starting when using the init based startup script.
+  $monitor_mode = { 'monitor_mode' => $merged_config['default_monitor_mode'] }
+  if $::facts['service_provider'] == 'redhat' {
     file { '/etc/sysconfig/maldet':
       ensure  => present,
       mode    => '0644',
       owner   => root,
       group   => root,
-      content => inline_epp('MONITOR_MODE="<%= $monitor_mode %>"', {'monitor_mode' => $merged_config['default_monitor_mode']}),
+      content => inline_epp('MONITOR_MODE="<%= $monitor_mode %>"', $monitor_mode),
     }
   }
 
