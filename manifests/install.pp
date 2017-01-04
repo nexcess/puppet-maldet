@@ -5,6 +5,7 @@ class maldet::install (
   String  $package_name        = $maldet::package_name,
   String  $ensure              = $maldet::ensure,
   Boolean $cleanup_old_install = $maldet::cleanup_old_install,
+  Boolean $manage_epel         = $maldet::manage_epel,
 ) {
 
   # killall is used by install.sh
@@ -18,7 +19,7 @@ class maldet::install (
     target => '/usr/local/maldetect/maldet',
   }
 
-  if $::facts['os']['family'] == 'Redhat' {
+  if $manage_epel and $::facts['os']['family'] == 'Redhat' {
     include ::epel
     Class['epel'] ->
     Package['psmisc'] ->
