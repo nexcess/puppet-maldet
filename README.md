@@ -89,6 +89,10 @@ Separate hash of config options to override main config options during maldet's 
 
 Whether old backups of /usr/local/maldetect created by Maldet's install.sh should be removed.
 
+#### `manage_epel` _Boolean_ (true)
+
+Setup epel repository on Redhat based systems (required for some dependencies)
+
 ## Limitations
 
 Supported Operating Systems are:

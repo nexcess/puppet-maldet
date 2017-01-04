@@ -64,6 +64,7 @@ maldet::new_config:
   string_length: 150000
 maldet::cron_config: {}
 maldet::cleanup_old_install: true
+maldet::manage_epel: true
 
 # Config defaults for Linux Malware Detect < 1.5
 maldet::old_config:

@@ -16,6 +16,7 @@
 # @param monitor_paths list of paths that the maldet service should monitor files under. Note that directories containing
 #        large numbers of files will lead to long startup times for the maldet services.
 # @param cleanup_old_install Whether old backups of /usr/local/maldetect created by Maldet's install.sh should be removed. Defaults to true.
+# @param manage_epel Setup epel repository on Redhat based systems (required for some dependencies)
 #
 #
 class maldet (
@@ -29,6 +30,7 @@ class maldet (
   Array   $monitor_paths,
   Hash    $cron_config,
   Boolean $cleanup_old_install,
+  Boolean $manage_epel,
 ) {
 
   contain maldet::install
