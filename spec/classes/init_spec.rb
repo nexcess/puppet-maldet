@@ -69,6 +69,14 @@ describe 'maldet' do
                         :monitor_paths => ['/tmp', '/var/tmp'] }}
         it { should contain_file('/usr/local/maldetect/monitor_paths').
              with(:ensure => 'present') }
+        it { should contain_file('/usr/local/maldetect/ignore_file_ext').
+             with(:ensure => 'present') }
+        it { should contain_file('/usr/local/maldetect/ignore_inotify').
+             with(:ensure => 'present') }
+        it { should contain_file('/usr/local/maldetect/ignore_paths').
+             with(:ensure => 'present') }
+        it { should contain_file('/usr/local/maldetect/ignore_sigs').
+             with(:ensure => 'present') }
         it { should contain_service('maldet').
              with(:ensure => 'running') }
       end

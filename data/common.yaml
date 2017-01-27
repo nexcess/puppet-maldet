@@ -11,6 +11,22 @@ maldet::monitor_paths:
   - /var/tmp
   - /dev/shm
   - /var/fcgi_ipc
+maldet::ignore_file_ext: []
+maldet::ignore_inotify:
+  - ^/var/tmp/mysql.sock$
+  - ^/tmp/mysql.sock$
+  - ^/var/cache/buagent/md0.cache.data$
+  - ^/var/tmp/#sql_.*\.MYD$
+  - ^/tmp/#sql_.*\.MYD$
+  - ^/var/tmp/clamav-.*
+  - ^/tmp/clamav-.*
+  - ^/usr/local/maldetect*
+  - ^/dev/pts*
+  - ^/dev/null
+maldet::ignore_paths:
+  - /usr/local/maldetect
+  - /usr/local/sbin/maldet
+maldet::ignore_sigs: []
 
 # Config defaults for Linux Malware Detect > 1.5
 maldet::new_config:

@@ -81,6 +81,22 @@ See https://www.rfxn.com/appdocs/README.maldetect for available configuration op
 
 List of paths that the maldet service should monitor files under. Note that directories containing.
 
+#### `ignore_file_ext` _Array[String]_ ({})
+
+List of file extensions to ignore.
+
+#### `ignore_inotify` _Array[String]_ ({})
+
+List of paths to exclude from inotify monitor mode.
+
+#### `ignore_paths` _Array[String]_ ({})
+
+List of paths to exclude from scans.
+
+#### `ignore_sigs` _Array[String]_ ({})
+
+List of signatures to exclude.
+
 #### `cron_config` _Hash_ ({})
 
 Separate hash of config options to override main config options during maldet's daily cron job.

@@ -1,10 +1,14 @@
 # Manage Linux Malware Detect configuration files
 class maldet::config (
-  Hash    $config        = $maldet::config,
-  Array   $monitor_paths = $maldet::monitor_paths,
-  Hash    $cron_config   = $maldet::cron_config,
-  String  $version       = $maldet::version,
-  Boolean $daily_scan    = $maldet::daily_scan,
+  Hash    $config          = $maldet::config,
+  Array   $monitor_paths   = $maldet::monitor_paths,
+  Array   $ignore_file_ext = $maldet::ignore_file_ext,
+  Array   $ignore_inotify  = $maldet::ignore_inotify,
+  Array   $ignore_paths    = $maldet::ignore_paths,
+  Array   $ignore_sigs     = $maldet::ignore_sigs,
+  Hash    $cron_config     = $maldet::cron_config,
+  String  $version         = $maldet::version,
+  Boolean $daily_scan      = $maldet::daily_scan,
 ) {
 
   # Versions of maldet < 1.5 use a different set of
@@ -57,6 +61,38 @@ class maldet::config (
     owner   => root,
     group   => root,
     content => join($monitor_paths, "\n"),
+  }
+
+  file { '/usr/local/maldetect/ignore_file_ext':
+    ensure  => present,
+    mode    => '0644',
+    owner   => root,
+    group   => root,
+    content => join($ignore_file_ext, "\n"),
+  }
+
+  file { '/usr/local/maldetect/ignore_inotify':
+    ensure  => present,
+    mode    => '0644',
+    owner   => root,
+    group   => root,
+    content => join($ignore_inotify, "\n"),
+  }
+
+  file { '/usr/local/maldetect/ignore_paths':
+    ensure  => present,
+    mode    => '0644',
+    owner   => root,
+    group   => root,
+    content => join($ignore_paths, "\n"),
+  }
+
+  file { '/usr/local/maldetect/ignore_sigs':
+    ensure  => present,
+    mode    => '0644',
+    owner   => root,
+    group   => root,
+    content => join($ignore_sigs, "\n"),
   }
 
   unless $daily_scan {
