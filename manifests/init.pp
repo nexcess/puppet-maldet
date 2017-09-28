@@ -12,7 +12,6 @@
 # @param config Hash of config options to use. Booleans are converted to 0 or 1. options with multiple values such as 
 #        email_addr and scan_tmpdir_paths should be specified as an Array.
 # @see https://www.rfxn.com/appdocs/README.maldetect
-# @param cron_config Separate hash of config options for maldet's daily cron job.
 # @param monitor_paths list of paths that the maldet service should monitor files under. Note that directories containing large numbers of files will lead to long startup times for the maldet service.
 # @param ignore_file_ext list of file extensions to ignore
 # @param ignore_inotify list of paths to exclude from inotify monitor mode
@@ -35,7 +34,6 @@ class maldet (
   Array   $ignore_inotify,
   Array   $ignore_paths,
   Array   $ignore_sigs,
-  Hash    $cron_config,
   Boolean $cleanup_old_install,
   Boolean $manage_epel,
 ) {
