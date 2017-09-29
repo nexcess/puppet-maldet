@@ -21,24 +21,24 @@ class maldet::config (
     $merged_config = $default_config + $config
   }
 
-  $merged_conf = { 'config' => $merged_config }
-  file { '/usr/local/maldetect/conf.maldet':
-    ensure  => present,
-    mode    => '0644',
-    owner   => root,
-    group   => root,
-    content => epp('maldet/conf.maldet.epp', $merged_conf),
-  }
-
   # Allow config overrides for daily cron
-  $cron_conf = { 'config' => $cron_config }
+  $merged_conf = { 'config' => $merged_config }
   if versioncmp($maldet::version, '1.5') >= 0 {
     file { '/usr/local/maldetect/cron/conf.maldet.cron':
       ensure  => present,
       mode    => '0644',
       owner   => root,
       group   => root,
-      content => epp('maldet/conf.maldet.epp', $cron_conf),
+      content => epp('maldet/conf.maldet.epp', $merged_conf),
+    }
+  }
+  else {
+    file { '/usr/local/maldetect/conf.maldet':
+      ensure  => present,
+      mode    => '0644',
+      owner   => root,
+      group   => root,
+      content => epp('maldet/conf.maldet.epp', $merged_conf),
     }
   }
 

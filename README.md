@@ -97,10 +97,6 @@ List of paths to exclude from scans.
 
 List of signatures to exclude.
 
-#### `cron_config` _Hash_ ({})
-
-Separate hash of config options to override main config options during maldet's daily cron job.
-
 #### `cleanup_old_install` _Boolean_ (true)
 
 Whether old backups of /usr/local/maldetect created by Maldet's install.sh should be removed.
