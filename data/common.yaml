@@ -54,14 +54,14 @@ maldet::new_config:
     - /dev/shm
     - /var/fcgi_ipc
   scan_user_access: false
-  scan_cpunice: 19
+  scan_cpunice: 18
   scan_ionice: 6
   scan_cpulimit: false
   scan_ignore_root: true
   scan_ignore_user: []
   scan_ignore_group: []
-  scan_find_timeout: false
-  scan_export_filelist: false
+  scan_find_timeout: 28800
+  scan_export_filelist: true
   quarantine_hits: false
   quarantine_clean: false
   quarantine_suspend_user: false
@@ -71,7 +71,7 @@ maldet::new_config:
   inotify_sleep: 15
   inotify_reloadtime: 3600
   inotify_minuid: 500
-  inotify_docroot: public_html
+  inotify_docroot: public_html,public_ftp
   inotify_cpunice: 18
   inotify_ionice: 6
   inotify_cpulimit: 0
