@@ -8,7 +8,6 @@ class maldet::config (
   Array   $ignore_sigs     = $maldet::ignore_sigs,
   Hash    $cron_config     = $maldet::cron_config,
   String  $version         = $maldet::version,
-  Boolean $daily_scan      = $maldet::daily_scan,
 ) {
 
   # Versions of maldet < 1.5 use a different set of
@@ -93,11 +92,5 @@ class maldet::config (
     owner   => root,
     group   => root,
     content => join($ignore_sigs, "\n"),
-  }
-
-  unless $daily_scan {
-    file { '/etc/cron.daily/maldet':
-      ensure => absent,
-    }
   }
 }

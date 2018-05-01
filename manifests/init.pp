@@ -7,7 +7,6 @@
 # @param package_name Optional package name to use. Will install from source if left empty. Defaults to ''
 # @param ensure Whether to install or remove maldet. Valid values are "present" or "absent". Defaults to 'present'
 # @param service_ensure Whether the maldet inotify monitor service should be running
-# @param daily_scan Whether to enable maldet's daily scan cron job. Defaults to true.
 # @param mirror_url Base URL to download maldet source tarball from. Defaults to 'https://www.rfxn.com/downloads'
 # @param config Hash of config options to use. Booleans are converted to 0 or 1. options with multiple values such as 
 #        email_addr and scan_tmpdir_paths should be specified as an Array.
@@ -27,7 +26,6 @@ class maldet (
   String  $package_name,
   String  $ensure,
   String  $service_ensure,
-  Boolean $daily_scan,
   String  $mirror_url,
   Hash    $config,
   Array   $monitor_paths,

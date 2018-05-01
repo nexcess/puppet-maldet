@@ -17,11 +17,17 @@ This module has been tested with Maldet verions:
 
 By default Maldet is installed from source using the Maldet {} type/provider. If you prefer to use a package, simply use the "package_name" parameter to specify the name of your package, and it will use that instead (assuming any necessary repositories have been enabled).
 
-Maldet will setup a cronjob that runs a daily scan on certain paths on the servers home directory depending on what directories it sees as present on a server.
+Maldet will setup a daily cronjob that provides the following capabilities:
 
-It will also setup an inotify service to watch and scan changed files under certain directories (set to /tmp, /var/tmp, /dev/shm, and /var/fcgi_ipc by default).
+* Autoupdate Maldet version.
+* Autoupdate Maldet signatures.
+* Send a daily or weekly report of file creation/modify/move operations to email recipients if monitor mode is selected.
+* If monitor mode is *not* selected, a daily scan of recent file changes is performed. The scan supports a variety of common control panel systems or standard Linux /home\*/user paths.
+* Cleanup session, temp and quarantine data.
 
-Both the cron job and service are managed by the daily_scan and service_ensure parameters, respectively.
+If monitor mode is enabled, Maldet will also setup an inotify service to watch and scan changed files under certain directories (set to /tmp, /var/tmp, /dev/shm, and /var/fcgi_ipc by default).
+
+The Maldet service is managed by the service_ensure parameter.
 
 ## Usage
 
@@ -62,10 +68,6 @@ Whether to install or remove maldet. Valid values are "present" or "absent".
 #### `service_ensure` _String_ ('running')
 
 Whether the maldet inotify monitor service should be running.
-
-#### `daily_scan` _Boolean_ (true)
-
-Whether to enable maldet's daily scan cron job.
 
 #### `mirror_url` _String_ ('https://www.rfxn.com/downloads')
 
