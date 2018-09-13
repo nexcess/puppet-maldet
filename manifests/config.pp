@@ -45,7 +45,7 @@ class maldet::config (
   # MONITOR_MODE is commented out by default and can prevent maldet service
   # from starting when using the init based startup script.
   $monitor_mode = { 'monitor_mode' => $merged_config['default_monitor_mode'] }
-  if $::facts['service_provider'] == 'redhat' {
+  if $::facts['os']['family'] == 'redhat' {
     file { '/etc/sysconfig/maldet':
       ensure  => present,
       mode    => '0644',
