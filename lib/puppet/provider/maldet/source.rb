@@ -46,7 +46,7 @@ Puppet::Type.type(:maldet).provide(:source) do
 
   def destroy
     Dir.chdir('/usr/local/maldetect/') do
-      if File.exists('./uninstall.sh')
+      if File.exists?('./uninstall.sh')
         %x{ echo y | ./uninstall.sh }
       else
         puts 'Unable to locate uninstall script (this script is not provided in Maldet versions < 1.5).'
