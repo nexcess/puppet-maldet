@@ -1,5 +1,5 @@
 ---
-maldet::version: '1.5'
+maldet::version: '1.6'
 maldet::package_name: ''
 maldet::ensure: present
 maldet::service_ensure: running
@@ -37,10 +37,12 @@ maldet::new_config:
   autoupdate_signatures: true
   autoupdate_version: false
   autoupdate_version_hashed: true
+  cron_prune_days: 21
   import_config_url: ''
   import_config_expire: 43200
   import_sigs_md5_url: ''
   import_sigs_hex_url: ''
+  scan_days: 1
   scan_max_depth: 15
   scan_min_filesize: 24
   scan_max_filesize: 768k
