@@ -24,8 +24,8 @@ maldet::ignore_inotify:
   - ^/dev/pts*
   - ^/dev/null
 maldet::ignore_paths:
-  - /usr/local/maldetect
-  - /usr/local/sbin/maldet
+  - ^/usr/local/maldetect$
+  - ^/usr/local/sbin/maldet$
 maldet::ignore_sigs: []
 
 # Config defaults for Linux Malware Detect > 1.5
