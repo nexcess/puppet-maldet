@@ -8,7 +8,7 @@
 # @param ensure Whether to install or remove maldet. Valid values are "present" or "absent". Defaults to 'present'
 # @param service_ensure Whether the maldet inotify monitor service should be running
 # @param daily_scan Whether to enable maldet's daily scan cron job. Defaults to true.
-# @param mirror_url Base URL to download maldet source tarball from. Defaults to 'https://www.rfxn.com/downloads'
+# @param mirror_url Base URL to download maldet source tarball from. Defaults to 'https://cdn.rfxn.com/downloads'
 # @param config Hash of config options to use. Booleans are converted to 0 or 1. options with multiple values such as 
 #        email_addr and scan_tmpdir_paths should be specified as an Array.
 # @see https://www.rfxn.com/appdocs/README.maldetect

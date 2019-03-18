@@ -4,7 +4,7 @@ maldet::package_name: ''
 maldet::ensure: present
 maldet::service_ensure: running
 maldet::daily_scan: true
-maldet::mirror_url: https://www.rfxn.com/downloads
+maldet::mirror_url: https://cdn.rfxn.com/downloads
 maldet::config: {}
 maldet::monitor_paths:
   - /tmp
