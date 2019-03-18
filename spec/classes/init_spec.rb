@@ -19,7 +19,7 @@ describe 'maldet' do
 
       describe 'maldet::install' do
         let(:params) {{ :version => '1.6',
-                        :mirror_url => 'https://www.rfxn.com/downloads',
+                        :mirror_url => 'https://cdn.rfxn.com/downloads',
                         :package_name => '',
                         :ensure => 'present',
                         :cleanup_old_install => true }}
@@ -32,7 +32,7 @@ describe 'maldet' do
              with(:ensure => 'link') }
         it { should contain_file('/usr/sbin/lmd').
              with(:ensure => 'link') }
-        it { should contain_maldet('https://www.rfxn.com/downloads').
+        it { should contain_maldet('https://cdn.rfxn.com/downloads').
              with(:ensure => 'present') }
 
         describe 'allow installation from package' do
