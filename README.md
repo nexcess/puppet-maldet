@@ -67,9 +67,9 @@ Whether the maldet inotify monitor service should be running.
 
 Whether to enable maldet's daily scan cron job.
 
-#### `mirror_url` _String_ ('https://www.rfxn.com/downloads')
+#### `mirror_url` _String_ ('https://cdn.rfxn.com/downloads')
 
-Base URL to download maldet source tarball from. Defaults to 'https://www.rfxn.com/downloads'
+Base URL to download maldet source tarball from. Defaults to 'https://cdn.rfxn.com/downloads'
 
 #### `config` _Hash_ ({ 'autoupdate_version' => false })
 
