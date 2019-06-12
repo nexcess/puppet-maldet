@@ -28,10 +28,6 @@ describe 'maldet' do
         it { should contain_package('cpulimit').with(:ensure => 'present') }
         it { should contain_package('inotify-tools').with(:ensure => 'present') }
         it { should contain_package('perl').with(:ensure => 'present') }
-        it { should contain_file('/usr/sbin/maldet').
-             with(:ensure => 'link') }
-        it { should contain_file('/usr/sbin/lmd').
-             with(:ensure => 'link') }
         it { should contain_maldet('https://cdn.rfxn.com/downloads').
              with(:ensure => 'present') }
 

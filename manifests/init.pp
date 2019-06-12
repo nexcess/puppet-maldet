@@ -46,8 +46,8 @@ class maldet (
     contain maldet::config
     contain maldet::service
 
-    Class['maldet::install'] ~>
-    Class['maldet::config'] ~>
-    Class['maldet::service']
+    Class['maldet::install']
+    ~> Class['maldet::config']
+    ~> Class['maldet::service']
   }
 }

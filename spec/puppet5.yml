@@ -1,0 +1,62 @@
+project_name: puppet-config-puppet5
+
+containers:
+  ruby24:
+    image: ruby:2.4
+    volumes:
+      - local: ../
+        container: /code
+        options: cached
+    working_directory: /code
+    environment:
+      BUNDLE_PATH: /code/.bundle
+      PUPPET_GEM_VERSION: '~> 5.5'
+    run_as_current_user:
+      enabled: true
+      home_directory: /home/container-user
+
+tasks:
+  bundleInstall:
+    description: 'Run Bundler'
+    group: 'Setup Tasks'
+    run:
+      container: ruby24
+      command: bundle install
+
+  validate:
+    description: 'Run Puppet Parser Validate'
+    group: 'Lint Tasks'
+    prerequisites:
+      - bundleInstall
+    run:
+      container: ruby24
+      command: bundle exec rake validate
+
+  puppetLint:
+    description: 'Run Puppet Lint'
+    group: 'Lint Tasks'
+    prerequisites:
+      - bundleInstall
+    run:
+      container: ruby24
+      command: bundle exec rake lint
+
+  runSpec:
+    description: 'Run Spec Tests'
+    group: 'Test Tasks'
+    prerequisites:
+      - bundleInstall
+    run:
+      container: ruby24
+      command: bundle exec rake spec SPEC_OPTS='--format documentation'
+
+  runAll:
+    description: 'Run All Tasks'
+    group: 'Lint Tasks'
+    prerequisites:
+      - validate
+      - puppetLint
+      - runSpec
+    run:
+      container: ruby24
+      command: /bin/true

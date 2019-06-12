@@ -16,12 +16,12 @@ class maldet::install (
 
   if $manage_epel and $::facts['os']['family'] == 'Redhat' {
     include ::epel
-    Class['epel'] ->
-    Package['psmisc'] ->
-    Package['wget'] ->
-    Package['cpulimit'] ->
-    Package['inotify-tools'] ->
-    Package['perl']
+    Class['epel']
+    -> Package['psmisc']
+    -> Package['wget']
+    -> Package['cpulimit']
+    -> Package['inotify-tools']
+    -> Package['perl']
   }
 
   if $package_name == '' {
