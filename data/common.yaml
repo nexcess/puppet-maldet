@@ -27,6 +27,7 @@ maldet::ignore_paths:
   - ^/usr/local/maldetect$
   - ^/usr/local/sbin/maldet$
 maldet::ignore_sigs: []
+maldet::monitor_mode_enabled: true
 
 # Config defaults for Linux Malware Detect > 1.5
 maldet::new_config:
