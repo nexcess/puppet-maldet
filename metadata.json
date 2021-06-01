@@ -9,12 +9,6 @@
   "issues_url": "https://github.com/nexcess/puppet-maldet/issues",
   "operatingsystem_support": [
     {
-      "operatingsystem": "Ubuntu",
-      "operatingsystemrelease": [
-        "16.04"
-      ]
-    },
-    {
       "operatingsystem": "RedHat",
       "operatingsystemrelease": [
         "7",
