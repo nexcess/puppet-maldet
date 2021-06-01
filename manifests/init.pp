@@ -13,6 +13,7 @@
 #        email_addr and scan_tmpdir_paths should be specified as an Array.
 # @see https://www.rfxn.com/appdocs/README.maldetect
 # @param cron_config Separate hash of config options for maldet's daily cron job.
+# @param monitor_mode_enabled boolean to toggle maldet monitor mode on and off
 # @param monitor_paths list of paths that the maldet service should monitor files under. Note that directories containing large numbers of files will lead to long startup times for the maldet service.
 # @param ignore_file_ext list of file extensions to ignore
 # @param ignore_inotify list of paths to exclude from inotify monitor mode
@@ -31,6 +32,7 @@ class maldet (
   String  $mirror_url,
   Hash    $config,
   Array   $monitor_paths,
+  Boolean $monitor_mode_enabled,
   Array   $ignore_file_ext,
   Array   $ignore_inotify,
   Array   $ignore_paths,
