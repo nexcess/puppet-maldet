@@ -20,6 +20,9 @@
 # @param ignore_sigs list of signatures to exclude
 # @param cleanup_old_install Whether old backups of /usr/local/maldetect created by Maldet's install.sh should be removed. Defaults to true.
 # @param manage_epel Setup epel repository on Redhat based systems (required for some dependencies)
+# @param monitor_mode string matching one of the following: A. the word `disabled`, which will disable monitor mode.
+#        B. the word `users`, which will monitor all local linux users. C. an absolute path to a file containing a
+#        list of users to monitor.
 #
 #
 class maldet (
@@ -38,6 +41,7 @@ class maldet (
   Hash    $cron_config,
   Boolean $cleanup_old_install,
   Boolean $manage_epel,
+  Variant[Enum['disabled', 'users'], Stdlib::Absolutepath] $monitor_mode,
 ) {
 
   contain maldet::install

@@ -1,7 +1,6 @@
 # Manage Linux Malware Detect configuration files
 class maldet::config (
   Hash    $config          = $maldet::config,
-  Array   $monitor_paths   = $maldet::monitor_paths,
   Array   $ignore_file_ext = $maldet::ignore_file_ext,
   Array   $ignore_inotify  = $maldet::ignore_inotify,
   Array   $ignore_paths    = $maldet::ignore_paths,
@@ -9,6 +8,8 @@ class maldet::config (
   Hash    $cron_config     = $maldet::cron_config,
   String  $version         = $maldet::version,
   Boolean $daily_scan      = $maldet::daily_scan,
+  Array   $monitor_paths   = $maldet::monitor_paths,
+  Variant[Enum['disabled', 'users'], Stdlib::Absolutepath] $monitor_mode = $maldet::monitor_mode,
 ) {
 
   # Versions of maldet < 1.5 use a different set of
@@ -44,15 +45,12 @@ class maldet::config (
 
   # MONITOR_MODE is commented out by default and can prevent maldet service
   # from starting when using the init based startup script.
-  $monitor_mode = { 'monitor_mode' => $merged_config['default_monitor_mode'] }
-  if $::facts['os']['family'] == 'redhat' {
-    file { '/etc/sysconfig/maldet':
-      ensure  => present,
-      mode    => '0644',
-      owner   => root,
-      group   => root,
-      content => inline_epp('MONITOR_MODE="<%= $monitor_mode %>"', $monitor_mode),
-    }
+  file { '/etc/sysconfig/maldet':
+    ensure  => present,
+    mode    => '0644',
+    owner   => root,
+    group   => root,
+    content => epp('maldet/sysconfig_maldet.epp', {monitor_mode => $monitor_mode}),
   }
 
   file { '/usr/local/maldetect/monitor_paths':
