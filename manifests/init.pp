@@ -13,7 +13,6 @@
 #        email_addr and scan_tmpdir_paths should be specified as an Array.
 # @see https://www.rfxn.com/appdocs/README.maldetect
 # @param cron_config Separate hash of config options for maldet's daily cron job.
-# @param monitor_mode_enabled boolean to toggle maldet monitor mode on and off
 # @param monitor_paths list of paths that the maldet service should monitor files under. Note that directories containing large numbers of files will lead to long startup times for the maldet service.
 # @param ignore_file_ext list of file extensions to ignore
 # @param ignore_inotify list of paths to exclude from inotify monitor mode
@@ -21,6 +20,9 @@
 # @param ignore_sigs list of signatures to exclude
 # @param cleanup_old_install Whether old backups of /usr/local/maldetect created by Maldet's install.sh should be removed. Defaults to true.
 # @param manage_epel Setup epel repository on Redhat based systems (required for some dependencies)
+# @param monitor_mode string matching one of the following: A. the word `disabled`, which will disable monitor mode.
+#        B. the word `users`, which will monitor all local linux users. C. an absolute path to a file containing a
+#        list of users to monitor.
 #
 #
 class maldet (
@@ -32,7 +34,6 @@ class maldet (
   String  $mirror_url,
   Hash    $config,
   Array   $monitor_paths,
-  Boolean $monitor_mode_enabled,
   Array   $ignore_file_ext,
   Array   $ignore_inotify,
   Array   $ignore_paths,
@@ -40,6 +41,7 @@ class maldet (
   Hash    $cron_config,
   Boolean $cleanup_old_install,
   Boolean $manage_epel,
+  Variant[Enum['disabled', 'users'], Stdlib::Absolutepath] $monitor_mode,
 ) {
 
   contain maldet::install

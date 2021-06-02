@@ -27,7 +27,10 @@ maldet::ignore_paths:
   - ^/usr/local/maldetect$
   - ^/usr/local/sbin/maldet$
 maldet::ignore_sigs: []
-maldet::monitor_mode_enabled: true
+maldet::monitor_mode: 'disabled'
+maldet::cron_config: {}
+maldet::cleanup_old_install: true
+maldet::manage_epel: true
 
 # Config defaults for Linux Malware Detect > 1.5
 maldet::new_config:
@@ -69,7 +72,6 @@ maldet::new_config:
   quarantine_clean: false
   quarantine_suspend_user: false
   quarantine_suspend_user_minuid: 500
-  default_monitor_mode: /usr/local/maldetect/monitor_paths
   inotify_base_watches: 16384
   inotify_sleep: 15
   inotify_reloadtime: 3600
@@ -81,9 +83,6 @@ maldet::new_config:
   inotify_verbose: false
   string_length_scan: false
   string_length: 150000
-maldet::cron_config: {}
-maldet::cleanup_old_install: true
-maldet::manage_epel: true
 
 # Config defaults for Linux Malware Detect < 1.5
 maldet::old_config:
