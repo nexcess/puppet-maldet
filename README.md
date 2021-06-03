@@ -14,6 +14,7 @@ This module installs and configures Linux Malware Detect (Maldet)
 This module has been tested with Maldet verions:
   - 1.4.x
   - 1.5
+  - 1.6
 
 By default Maldet is installed from source using the Maldet {} type/provider. If you prefer to use a package, simply use the "package_name" parameter to specify the name of your package, and it will use that instead (assuming any necessary repositories have been enabled).
 
@@ -47,7 +48,7 @@ include ::maldet
 
 `Name`, _Type_, (Default)
 
-#### `version` _String_ ('1.5')
+#### `version` _String_ ('1.6')
 
 Version of Maldet to install.
 
@@ -76,6 +77,13 @@ Base URL to download maldet source tarball from. Defaults to 'https://cdn.rfxn.c
 Hash of config options to use. Booleans are converted to 0 or 1. Options with multiple values such as email_addr and scan_tmpdir_paths should be specified as an Array. Uses defaults provided from Maldet source, except daily version updates are disabled by default.
 
 See https://www.rfxn.com/appdocs/README.maldetect for available configuration options.
+
+#### `monitor_mode` _String_ ('disabled')
+
+String matching one of the following:
+1. The word 'disabled'. This will disable the sysconfig configuration for monitor mode.
+2. The word 'users'. This will enable monitor mode in sysconfig for all local linux users.
+3. An absolute path to a line-spaced file, containing a list of paths to monitor.
 
 #### `monitor_paths` _Array[String]_ ({})
 
@@ -114,12 +122,11 @@ Setup epel repository on Redhat based systems (required for some dependencies)
 Supported Operating Systems are:
   - RHEL 6/7
   - CentOS 6/7
-  - Ubuntu 16.04
 
 ## Copyright
 
 ~~~
-   Copyright 2016 Nexcess.net
+   Copyright 2021 Nexcess.net
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
