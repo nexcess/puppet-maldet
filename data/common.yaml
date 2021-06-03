@@ -72,6 +72,7 @@ maldet::new_config:
   quarantine_clean: false
   quarantine_suspend_user: false
   quarantine_suspend_user_minuid: 500
+  default_monitor_mode: '/usr/local/maldetect/monitor_paths'
   inotify_base_watches: 16384
   inotify_sleep: 15
   inotify_reloadtime: 3600
