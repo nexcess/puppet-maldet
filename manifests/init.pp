@@ -23,6 +23,7 @@
 # @param monitor_mode string matching one of the following: A. the word `disabled`, which will disable monitor mode.
 #        B. the word `users`, which will monitor all local linux users. C. an absolute path to a file containing a
 #        list of users to monitor.
+# @param sysconfig_path Path to sysconfig file, generally set by module per OS.
 #
 #
 class maldet (
@@ -42,6 +43,7 @@ class maldet (
   Boolean $cleanup_old_install,
   Boolean $manage_epel,
   Variant[Enum['disabled', 'users'], Stdlib::Absolutepath] $monitor_mode,
+  String  $sysconfig_path,
 ) {
 
   contain maldet::install
