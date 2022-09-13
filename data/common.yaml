@@ -5,7 +5,6 @@ maldet::ensure: present
 maldet::service_ensure: running
 maldet::daily_scan: true
 maldet::mirror_url: https://cdn.rfxn.com/downloads
-maldet::config: {}
 maldet::monitor_paths:
   - /tmp
   - /var/tmp
@@ -32,8 +31,7 @@ maldet::cron_config: {}
 maldet::cleanup_old_install: true
 maldet::manage_epel: true
 
-# Config defaults for Linux Malware Detect > 1.5
-maldet::new_config:
+maldet::config:
   email_alert: false
   email_addr:
     - you@domain.com
@@ -84,30 +82,3 @@ maldet::new_config:
   inotify_verbose: false
   string_length_scan: false
   string_length: 150000
-
-# Config defaults for Linux Malware Detect < 1.5
-maldet::old_config:
-  email_alert: false
-  email_subj: maldet alert from $(hostname)
-  email_addr:
-    - you@domain.com
-  email_ignore_clean: false
-  quar_hits: false
-  quar_clean: true
-  quar_susp: false
-  quar_susp_minuid: 500
-  maxdepth: 15
-  minfilesize: 32
-  maxfilesize: 768k
-  hexdepth: 61440
-  hex_fifo_scan: true
-  hex_fifo_depth: 524288
-  clamav_scan: true
-  public_scan: false
-  string_length_scan: false
-  string_length: 150000
-  inotify_base_watches: 15360
-  inotify_stime: 30
-  inotify_minuid: 500
-  inotify_webdir: public_html
-  inotify_nice: 10
