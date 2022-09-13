@@ -12,7 +12,6 @@
 This module installs and configures Linux Malware Detect (Maldet)
 
 This module has been tested with Maldet verions:
-  - 1.4.x
   - 1.5
   - 1.6
 

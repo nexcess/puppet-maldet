@@ -12,23 +12,16 @@ class maldet::config (
   Variant[Enum['disabled', 'users'], Stdlib::Absolutepath] $monitor_mode = $maldet::monitor_mode,
 ) {
 
-  # Versions of maldet < 1.5 use a different set of
-  # config options
-  if versioncmp($maldet::version, '1.5') >= 0 {
-    $default_config = lookup('maldet::new_config', Hash)
-    $merged_config = $default_config + $config
-  } else {
-    $default_config = lookup('maldet::old_config', Hash)
-    $merged_config = $default_config + $config
+  if versioncmp($maldet::version, '1.5') < 0 {
+    fail("Versions of maldet lower than 1.5 are unsupported. The version specified as \$maldet:version is ${maldet::version}")
   }
 
-  $merged_conf = { 'config' => $merged_config }
   file { '/usr/local/maldetect/conf.maldet':
     ensure  => present,
     mode    => '0644',
     owner   => root,
     group   => root,
-    content => epp('maldet/conf.maldet.epp', $merged_conf),
+    content => epp('maldet/conf.maldet.epp', { 'config' => $config }),
   }
 
   # Allow config overrides for daily cron
