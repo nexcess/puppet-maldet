@@ -30,6 +30,7 @@ maldet::monitor_mode: 'disabled'
 maldet::cron_config: {}
 maldet::cleanup_old_install: true
 maldet::manage_epel: true
+maldet::sysconfig_path: '/etc/sysconfig/maldet'
 
 maldet::config:
   email_alert: false

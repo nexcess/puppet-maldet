@@ -10,6 +10,7 @@ class maldet::config (
   Boolean $daily_scan      = $maldet::daily_scan,
   Array   $monitor_paths   = $maldet::monitor_paths,
   Variant[Enum['disabled', 'users'], Stdlib::Absolutepath] $monitor_mode = $maldet::monitor_mode,
+  String  $sysconfig_path  = $maldet::sysconfig_path,
 ) {
 
   if versioncmp($maldet::version, '1.5') < 0 {
@@ -38,7 +39,7 @@ class maldet::config (
 
   # MONITOR_MODE is commented out by default and can prevent maldet service
   # from starting when using the init based startup script.
-  file { '/etc/sysconfig/maldet':
+  file { $sysconfig_path:
     ensure  => present,
     mode    => '0644',
     owner   => root,
