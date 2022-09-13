@@ -1,5 +1,5 @@
 ---
-maldet::version: '1.6'
+maldet::version: '1.6.4'
 maldet::package_name: ''
 maldet::ensure: present
 maldet::service_ensure: running
