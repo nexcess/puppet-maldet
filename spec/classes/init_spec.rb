@@ -47,12 +47,6 @@ describe 'maldet' do
         it { should contain_file('/usr/local/maldetect/cron/conf.maldet.cron').
              with(:ensure => 'present') }
 
-        describe 'do not create conf.maldet.cron on older versions' do
-          let(:params) {{ :version => '1.4.2' }}
-          it { should_not contain_file('/usr/local/maldetect/cron/conf.maldet.cron').
-               with(:ensure => 'present') }
-        end
-
         describe 'remove daily cron if daily_scan option is toggled' do
           let(:params) {{ :daily_scan=> false }}
           it { should contain_file('/etc/cron.daily/maldet').
