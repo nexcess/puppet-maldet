@@ -3,5 +3,6 @@ fixtures:
   repositories:
     "stdlib": "https://github.com/puppetlabs/puppetlabs-stdlib"
     "epel": "https://github.com/stahnma/puppet-module-epel"
+    "yumrepo": "https://github.com/puppetlabs/puppetlabs-yumrepo_core"
   symlinks:
     maldet: "#{source_dir}"
