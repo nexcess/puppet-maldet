@@ -23,11 +23,11 @@ describe 'maldet' do
                         :package_name => '',
                         :ensure => 'present',
                         :cleanup_old_install => true }}
-        it { should contain_package('psmisc').with(:ensure => 'present') }
-        it { should contain_package('wget').with(:ensure => 'present') }
-        it { should contain_package('cpulimit').with(:ensure => 'present') }
-        it { should contain_package('inotify-tools').with(:ensure => 'present') }
-        it { should contain_package('perl').with(:ensure => 'present') }
+        it { should contain_package('psmisc').with(:ensure => 'installed') }
+        it { should contain_package('wget').with(:ensure => 'installed') }
+        it { should contain_package('cpulimit').with(:ensure => 'installed') }
+        it { should contain_package('inotify-tools').with(:ensure => 'installed') }
+        it { should contain_package('perl').with(:ensure => 'installed') }
         it { should contain_maldet('https://cdn.rfxn.com/downloads').
              with(:ensure => 'present') }
 
