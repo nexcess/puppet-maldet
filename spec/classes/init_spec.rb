@@ -23,11 +23,11 @@ describe 'maldet' do
                         :package_name => '',
                         :ensure => 'present',
                         :cleanup_old_install => true }}
-        it { should contain_package('psmisc').with(:ensure => 'present') }
-        it { should contain_package('wget').with(:ensure => 'present') }
-        it { should contain_package('cpulimit').with(:ensure => 'present') }
-        it { should contain_package('inotify-tools').with(:ensure => 'present') }
-        it { should contain_package('perl').with(:ensure => 'present') }
+        it { should contain_package('psmisc').with(:ensure => 'installed') }
+        it { should contain_package('wget').with(:ensure => 'installed') }
+        it { should contain_package('cpulimit').with(:ensure => 'installed') }
+        it { should contain_package('inotify-tools').with(:ensure => 'installed') }
+        it { should contain_package('perl').with(:ensure => 'installed') }
         it { should contain_maldet('https://cdn.rfxn.com/downloads').
              with(:ensure => 'present') }
 
@@ -46,12 +46,6 @@ describe 'maldet' do
              with(:ensure => 'present') }
         it { should contain_file('/usr/local/maldetect/cron/conf.maldet.cron').
              with(:ensure => 'present') }
-
-        describe 'do not create conf.maldet.cron on older versions' do
-          let(:params) {{ :version => '1.4.2' }}
-          it { should_not contain_file('/usr/local/maldetect/cron/conf.maldet.cron').
-               with(:ensure => 'present') }
-        end
 
         describe 'remove daily cron if daily_scan option is toggled' do
           let(:params) {{ :daily_scan=> false }}

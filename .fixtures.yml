@@ -1,6 +1,8 @@
+---
 fixtures:
   repositories:
-    "stdlib": "git://github.com/puppetlabs/puppetlabs-stdlib.git"
-    "epel": "git://github.com/stahnma/puppet-module-epel.git"
+    "stdlib": "https://github.com/puppetlabs/puppetlabs-stdlib"
+    "epel": "https://github.com/nexcess/puppet-epel"
+    "yumrepo": "https://github.com/puppetlabs/puppetlabs-yumrepo_core"
   symlinks:
     maldet: "#{source_dir}"
