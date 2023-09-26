@@ -21,6 +21,13 @@
         "7",
         "6"
       ]
+    },
+    {
+      "operatingsystem": "Rocky",
+      "operatingsystemrelease": [
+        "8",
+        "9"
+      ]
     }
   ],
   "requirements": [
@@ -37,6 +44,10 @@
     {
       "name": "puppet-epel",
       "version_requirement": ">= 1.0.0 < 4.0.0"
+    },
+    {
+      "name": "puppetlabs-yumrepo_core",
+      "version_requirement": ">= 1.0.0 < 3.0.0"
     }
   ]
 }

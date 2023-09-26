@@ -7,21 +7,34 @@ class maldet::install (
   Boolean $cleanup_old_install = $maldet::cleanup_old_install,
   Boolean $manage_epel         = $maldet::manage_epel,
 ) {
-
   # killall is used by install.sh
-  # cpulimit is used for the scan_cpulimit config option
   # wget is used for signature & version updates
   # inotify-tools is used by the maldet service
-  ensure_packages(['psmisc', 'wget', 'cpulimit', 'inotify-tools', 'perl'])
+  ensure_packages(['psmisc', 'wget', 'inotify-tools', 'perl'])
 
-  if $manage_epel and $::facts['os']['family'] == 'Redhat' {
-    include ::epel
+  # cpulimit is used for the scan_cpulimit config option
+  # it is not available in epel for el9
+  if $facts['os']['family'] == 'RedHat' and versioncmp($facts['os']['release']['major'], '9') < 0 {
+    ensure_packages(['cpulimit'])
+  }
+
+  if $manage_epel and $facts['os']['family'] == 'Redhat' {
+    include epel
     Class['epel']
     -> Package['psmisc']
     -> Package['wget']
-    -> Package['cpulimit']
     -> Package['inotify-tools']
     -> Package['perl']
+  }
+
+  if (
+    $manage_epel and
+    $facts['os']['family'] == 'RedHat' and
+    versioncmp($facts['os']['release']['major'], '9') < 0
+  ) {
+    include epel
+    Class['epel']
+    -> Package['cpulimit']
   }
 
   if $package_name == '' {

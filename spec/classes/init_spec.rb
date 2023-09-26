@@ -23,13 +23,19 @@ describe 'maldet' do
                         :package_name => '',
                         :ensure => 'present',
                         :cleanup_old_install => true }}
-        it { should contain_package('psmisc').with(:ensure => 'installed') }
-        it { should contain_package('wget').with(:ensure => 'installed') }
-        it { should contain_package('cpulimit').with(:ensure => 'installed') }
-        it { should contain_package('inotify-tools').with(:ensure => 'installed') }
-        it { should contain_package('perl').with(:ensure => 'installed') }
         it { should contain_maldet('https://cdn.rfxn.com/downloads').
              with(:ensure => 'present') }
+        it { should contain_package('psmisc').with(:ensure => 'installed') }
+        it { should contain_package('wget').with(:ensure => 'installed') }
+        it { should contain_package('inotify-tools').with(:ensure => 'installed') }
+        it { should contain_package('perl').with(:ensure => 'installed') }
+
+        case facts[:os]["release"]["major"]
+          when '6'
+          when '7'
+          when '8'
+            it { should contain_package('cpulimit').with(:ensure => 'installed') }
+        end
 
         describe 'allow installation from package' do
           let(:params) {{ :package_name => 'maldetect' }}
