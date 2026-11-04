@@ -1,6 +1,7 @@
 # Manage Linux Malware Detect configuration files
 class maldet::config (
   Hash    $config          = $maldet::config,
+  Hash    $config_v2       = $maldet::config_v2,
   Array   $ignore_file_ext = $maldet::ignore_file_ext,
   Array   $ignore_inotify  = $maldet::ignore_inotify,
   Array   $ignore_paths    = $maldet::ignore_paths,
@@ -17,12 +18,30 @@ class maldet::config (
     fail("Versions of maldet lower than 1.5 are unsupported. The version specified as \$maldet:version is ${maldet::version}")
   }
 
+  if versioncmp($version, '2') >= 0 {
+    $final_config = $config + $config_v2
+
+    # 2.x's install.sh adds a weekly watchdog that runs `maldet -d`, a version
+    # upgrade, whenever signatures are over a week old, regardless of
+    # autoupdate_version. Puppet owns the version, so the watchdog has to go.
+    file { '/etc/cron.weekly/maldet-watchdog':
+      ensure => absent,
+    }
+  } else {
+    $final_config = $config
+
+    # Left behind by a 2.x install.sh when a host is downgraded; 1.x never creates it
+    file { '/etc/cron.d/maldet-sigup':
+      ensure => absent,
+    }
+  }
+
   file { '/usr/local/maldetect/conf.maldet':
     ensure  => present,
     mode    => '0644',
     owner   => root,
     group   => root,
-    content => epp('maldet/conf.maldet.epp', { 'config' => $config }),
+    content => epp('maldet/conf.maldet.epp', { 'config' => $final_config }),
   }
 
   # Allow config overrides for daily cron

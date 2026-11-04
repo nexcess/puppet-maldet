@@ -5,6 +5,8 @@ maldet::ensure: present
 maldet::service_ensure: running
 maldet::daily_scan: true
 maldet::mirror_url: https://cdn.rfxn.com/downloads
+maldet::release_url: https://github.com/rfxn/linux-malware-detect/releases/download
+maldet::checksum: ~
 maldet::monitor_paths:
   - /tmp
   - /var/tmp
@@ -83,3 +85,20 @@ maldet::config:
   inotify_verbose: false
   string_length_scan: false
   string_length: 150000
+
+# Merged over maldet::config on 2.x only. Puppet writes the whole conf.maldet,
+# and a key it leaves out falls back to 2.x's in-code default rather than the
+# value in its shipped conf.maldet. These restore the shipped values for the keys
+# where that difference changes a scan: with scan_csig unset, compound signatures
+# never run; with scan_yara_timeout unset, yara has no timeout; with
+# quarantine_on_error unset, a clamscan error disables quarantine. Without
+# scan_yara, 2.x also logs a warning on every run.
+maldet::config_v2:
+  scan_hashtype: auto
+  scan_clamscan: auto
+  scan_yara: auto
+  scan_yara_timeout: 300
+  scan_csig: true
+  scan_workers: auto
+  quarantine_on_error: true
+  email_format: html

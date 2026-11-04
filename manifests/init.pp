@@ -8,10 +8,15 @@
 # @param ensure Whether to install or remove maldet. Valid values are "present" or "absent". Defaults to 'present'
 # @param service_ensure Whether the maldet inotify monitor service should be running
 # @param daily_scan Whether to enable maldet's daily scan cron job. Defaults to true.
-# @param mirror_url Base URL to download maldet source tarball from. Defaults to 'https://cdn.rfxn.com/downloads'
+# @param mirror_url Base URL to download 1.x source tarballs from. Defaults to 'https://cdn.rfxn.com/downloads'
+# @param release_url Base URL to download 2.x release tarballs from. The tarball is fetched from
+#        <release_url>/v<version>/maldet-<version>.tar.gz. Defaults to GitHub releases.
+# @param checksum Optional SHA-256 of the tarball for $version. The install fails if the download doesn't match.
 # @param config Hash of config options to use. Booleans are converted to 0 or 1. options with multiple values such as 
 #        email_addr and scan_tmpdir_paths should be specified as an Array.
 # @see https://www.rfxn.com/appdocs/README.maldetect
+# @param config_v2 Hash of config options merged over config when version is 2.x or later. Use it for
+#        keys only 2.x understands, or for values that must differ between 1.x and 2.x hosts.
 # @param cron_config Separate hash of config options for maldet's daily cron job.
 # @param monitor_paths list of paths that the maldet service should monitor files under. Note that directories containing large numbers of files will lead to long startup times for the maldet service.
 # @param ignore_file_ext list of file extensions to ignore
@@ -33,7 +38,10 @@ class maldet (
   String  $service_ensure,
   Boolean $daily_scan,
   String  $mirror_url,
+  String  $release_url,
+  Optional[Pattern[/\A[0-9a-f]{64}\z/]] $checksum,
   Hash    $config,
+  Hash    $config_v2,
   Array   $monitor_paths,
   Array   $ignore_file_ext,
   Array   $ignore_inotify,

@@ -3,6 +3,9 @@ fixtures:
   repositories:
     "stdlib": "https://github.com/puppetlabs/puppetlabs-stdlib"
     "epel": "https://github.com/nexcess/puppet-epel"
-    "yumrepo": "https://github.com/puppetlabs/puppetlabs-yumrepo_core"
+    # last release to support Puppet 6; the default branch now needs Puppet 8 and Ruby 3.1
+    "yumrepo":
+      repo: "https://github.com/puppetlabs/puppetlabs-yumrepo_core"
+      ref: "v1.2.0"
   symlinks:
     maldet: "#{source_dir}"

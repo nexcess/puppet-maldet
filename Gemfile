@@ -42,6 +42,8 @@ end
 
 if puppetversion = ENV['PUPPET_GEM_VERSION']
   gem 'puppet', puppetversion, :require => false
+  # concurrent-ruby 1.2.0 removed Concurrent::RubyThreadLocalVar, which Puppet 6 needs to start
+  gem 'concurrent-ruby', '< 1.2.0' if puppetversion =~ /\b6\./
 else
   gem 'puppet', :require => false
 end
